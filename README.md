@@ -9,7 +9,7 @@ var cb = new CircuitBreaker(
                 circuitReset: TimeSpan.FromSeconds(15)
                 );
 
-cb.StatusChanged += (e) => { Console.Write(e.Status + " " + e.Date); };
+cb.StatusChanged += (e) => { Console.Write(e.Status + " - " + e.Date + " - " + e.Reason); };
 				
 try
 {
