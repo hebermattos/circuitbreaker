@@ -87,7 +87,6 @@ namespace CB.Test
             Assert.AreEqual(CircuitState.HalfOpen, cb.GetState());
         }
 
-
         [TestMethod]
         public void should_kepp_circuit_half_open_because_not_reach_max_success()
         {
