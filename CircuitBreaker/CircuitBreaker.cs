@@ -53,9 +53,9 @@ namespace CB.Core
             {
                 action.Invoke();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                TryOpenCircuit();
+                TryOpenCircuit(ex.Message);
 
                 throw;
             }
@@ -77,20 +77,20 @@ namespace CB.Core
 
                 TryCloseCircuit();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Open();
+                Open(ex.Message);
 
                 throw;
             }
         }
 
-        public void Open()
+        public void Open(string reason)
         {
             State = CircuitStatus.Open;
             OpenedAt = DateTime.UtcNow;
 
-            OnStatusChanged(new NewCircuitStatus(State));
+            OnStatusChanged(new NewCircuitStatus(State, reason));
         }
 
         public void HalfOpen()
@@ -119,12 +119,12 @@ namespace CB.Core
             StatusChanged?.Invoke(e);
         }
 
-        private void TryOpenCircuit()
+        private void TryOpenCircuit(string reason)
         {
             Errors++;
 
             if (Errors >= MaxErrors)
-                Open();
+                Open(reason);
         }
 
         private void TryHalfOpenCircuit()

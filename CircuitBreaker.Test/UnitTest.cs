@@ -78,7 +78,7 @@ namespace CB.Test
         {
             var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(2));
 
-            cb.Open();
+            cb.Open("test");
 
             Thread.Sleep(3000);
 
