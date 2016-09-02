@@ -25,9 +25,4 @@ catch (Exception)
 {
     //something went wrong. after five errors the circuit is open
 }
-
-  private static void StatusChanged(NewCircuitState e)
-        {
-            _logger.Info("state: " + e.State + " time: " + e.Date);
-        }
 ```
