@@ -56,7 +56,11 @@ namespace CB.Test
         [ExpectedException(typeof(OpenCircuitException))]
         public void circuit_keep_circuit_open()
         {
-            var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));
+            var cb = new CircuitBreaker(
+                maxErrors: 5, 
+                maxSuccess: 3, 
+                circuitReset: TimeSpan.FromSeconds(15)
+                );
 
             ExecuteErrorAction(cb);
             ExecuteErrorAction(cb);
