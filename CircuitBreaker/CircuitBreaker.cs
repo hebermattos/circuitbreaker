@@ -29,6 +29,62 @@ namespace CB.Core
             CircuitReset = circuitReset;
         }
 
+        public void Execute(Action action)
+        {
+            switch (State)
+            {
+                case CircuitStatus.Closed:
+                    ExecuteClosedCircuitAction(action);
+                    break;
+                case CircuitStatus.HalfOpen:
+                    ExecuteHalfOpenCircuitAction(action);
+                    break;
+                case CircuitStatus.Open:
+                    ExecuteOpenCircuitAction();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ExecuteClosedCircuitAction(Action action)
+        {
+            try
+            {
+                action.Invoke();
+            }
+            catch (Exception)
+            {
+                TryOpenCircuit();
+
+                throw;
+            }
+        }
+
+        private void ExecuteOpenCircuitAction()
+        {
+            TryHalfOpenCircuit();
+
+            if (State == CircuitStatus.Open)
+                throw new OpenCircuitException("Circuit is open");
+        }
+
+        private void ExecuteHalfOpenCircuitAction(Action action)
+        {
+            try
+            {
+                action.Invoke();
+
+                TryCloseCircuit();
+            }
+            catch (Exception)
+            {
+                Open();
+
+                throw;
+            }
+        }
+
         public void Open()
         {
             State = CircuitStatus.Open;
@@ -63,63 +119,7 @@ namespace CB.Core
             StatusChanged?.Invoke(e);
         }
 
-        public void Execute(Action action)
-        {
-            switch (State)
-            {
-                case CircuitStatus.Closed:
-                    ExecuteClosedCircuitAction(action);
-                    break;
-                case CircuitStatus.HalfOpen:
-                    ExecuteHalfOpenCircuitAction(action);
-                    break;
-                case CircuitStatus.Open:
-                    ExecuteOpenCircuitAction();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void ExecuteHalfOpenCircuitAction(Action action)
-        {
-            try
-            {
-                action.Invoke();
-
-                TryCloseCircuit();
-            }
-            catch (Exception)
-            {
-                Open();
-
-                throw;
-            }
-        }
-
-        private void ExecuteOpenCircuitAction()
-        {
-            TryHalfOpenCircuit();
-
-            if (State == CircuitStatus.Open)
-                throw new OpenCircuitException("Circuit is open");
-        }
-
-        private void ExecuteClosedCircuitAction(Action action)
-        {
-            try
-            {
-                action.Invoke();
-            }
-            catch (Exception)
-            {
-                IncrementErrors();
-
-                throw;
-            }
-        }
-
-        private void IncrementErrors()
+        private void TryOpenCircuit()
         {
             Errors++;
 
