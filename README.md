@@ -1,8 +1,7 @@
-# circuitbreaker
-simple net circuitbreaker
+# circuit breaker pattern
+http://martinfowler.com/bliki/CircuitBreaker.html
 
 # how to
-
 ``` c#
 var cb = new CircuitBreaker(
                 maxErrors: 5, 
