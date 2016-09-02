@@ -16,11 +16,12 @@ try
 }
 catch (OpenCircuitException)
 {
-    //the circuit is open. after 3 success the circuit half open, and after 15 with no errors, the circuit close
+    //the circuit is open. after 15 seconds the circuit half open, and after three consecutive success, the circuit close
+	//on error while half open the circuit open again
 }
 
 catch (Exception)
 {
-    //something went wrong. dont worry, the circuit breaker is watching. after five errors the circuit is open
+    //something went wrong. after five errors the circuit is open
 }
 ```
