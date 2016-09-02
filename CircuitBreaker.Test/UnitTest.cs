@@ -25,6 +25,11 @@ namespace CB.Test
             Assert.AreEqual(CircuitState.Closed, cb.GetState());
         }
 
+        private void Cb_StatusChanged(Events.NewCircuitState e)
+        {
+            throw new NotImplementedException();
+        }
+
         [TestMethod]
         public void should_keep_circuit_closed_beucase_not_reach_max_errors()
         {

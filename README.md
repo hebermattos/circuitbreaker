@@ -9,6 +9,8 @@ var cb = new CircuitBreaker(
                 circuitReset: TimeSpan.FromSeconds(15)
                 );
 
+cb.StatusChanged += (e) => { Console.Write(e.State + " " + e.Date); };
+				
 try
 {
     cb.Execute(() => { Foo(); });
@@ -23,4 +25,9 @@ catch (Exception)
 {
     //something went wrong. after five errors the circuit is open
 }
+
+  private static void StatusChanged(NewCircuitState e)
+        {
+            _logger.Info("state: " + e.State + " time: " + e.Date);
+        }
 ```
