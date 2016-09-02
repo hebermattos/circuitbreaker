@@ -58,14 +58,6 @@ namespace CB.Core
             return State;
         }
 
-        public void SetErrorsCount(int quantity)
-        {
-            Errors = quantity;
-
-            if (Errors >= MaxErrors)
-                Open();
-        }
-
         protected virtual void OnStatusChanged(NewCircuitStatus e)
         {
             StatusChanged?.Invoke(e);
