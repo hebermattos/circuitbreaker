@@ -10,22 +10,22 @@ namespace CB.Core
     public class CircuitBreaker
     {
         private CircuitState State;
-        private int MaxAttempts;
-        private int ShouldCloseSucessAttempts;
+        private int MaxErrors;
+        private int MaxSuccess;
         private int Errors;
-        private int HalfOpenSucess;
+        private int Success;
         private TimeSpan CircuitReset;
         private DateTime OpenedAt;
 
         public event ChangedStatusHandler StatusChanged;
 
-        public CircuitBreaker(int maxAttempts, int shouldCloseSucessAttempts, TimeSpan circuitReset)
+        public CircuitBreaker(int maxErrors, int maxSuccess, TimeSpan circuitReset)
         {
             State = CircuitState.Closed;
-            MaxAttempts = maxAttempts;
-            ShouldCloseSucessAttempts = shouldCloseSucessAttempts;
+            MaxErrors = maxErrors;
+            MaxSuccess = maxSuccess;
             Errors = 0;
-            HalfOpenSucess = 0;
+            Success = 0;
             CircuitReset = circuitReset;
         }
 
@@ -40,7 +40,7 @@ namespace CB.Core
         public void HalfOpen()
         {
             State = CircuitState.HalfOpen;
-            HalfOpenSucess = 0;
+            Success = 0;
 
             OnStatusChanged(new NewCircuitState(State));
         }
@@ -62,7 +62,7 @@ namespace CB.Core
         {
             Errors = quantity;
 
-            if (Errors >= MaxAttempts)
+            if (Errors >= MaxErrors)
                 Open();
         }
 
@@ -131,7 +131,7 @@ namespace CB.Core
         {
             Errors++;
 
-            if (Errors >= MaxAttempts)
+            if (Errors >= MaxErrors)
                 Open();
         }
 
@@ -143,9 +143,9 @@ namespace CB.Core
 
         private void TryCloseCircuit()
         {
-            HalfOpenSucess++;
+            Success++;
 
-            if (HalfOpenSucess >= ShouldCloseSucessAttempts)
+            if (Success >= MaxSuccess)
                 Close();
         }
 
