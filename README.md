@@ -16,11 +16,11 @@ try
 }
 catch (OpenCircuitException)
 {
-    //the circuit is open. make a sandwich and wait
+    //the circuit is open. after 3 success the circuit half open, and after 15 with no errors, the circuit close
 }
 
 catch (Exception)
 {
-    //something went wrong. dont worry, the circuit breaker is watching
+    //something went wrong. dont worry, the circuit breaker is watching. after five errors the circuit is open
 }
 ```
