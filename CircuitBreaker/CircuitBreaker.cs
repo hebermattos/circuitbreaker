@@ -24,8 +24,6 @@ namespace CB.Core
             State = CircuitStatus.Closed;
             MaxErrors = maxErrors;
             MaxSuccess = maxSuccess;
-            Errors = 0;
-            Success = 0;
             CircuitReset = circuitReset;
         }
 
