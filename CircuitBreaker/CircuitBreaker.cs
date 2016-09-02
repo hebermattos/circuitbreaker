@@ -5,11 +5,11 @@ using System;
 
 namespace CB.Core
 {
-    public delegate void ChangedStatusHandler(NewCircuitState e);
+    public delegate void ChangedStatusHandler(NewCircuitStatus e);
 
     public class CircuitBreaker
     {
-        private CircuitState State;
+        private CircuitStatus State;
         private int MaxErrors;
         private int MaxSuccess;
         private int Errors;
@@ -21,7 +21,7 @@ namespace CB.Core
 
         public CircuitBreaker(int maxErrors, int maxSuccess, TimeSpan circuitReset)
         {
-            State = CircuitState.Closed;
+            State = CircuitStatus.Closed;
             MaxErrors = maxErrors;
             MaxSuccess = maxSuccess;
             Errors = 0;
@@ -31,29 +31,29 @@ namespace CB.Core
 
         public void Open()
         {
-            State = CircuitState.Open;
+            State = CircuitStatus.Open;
             OpenedAt = DateTime.UtcNow;
 
-            OnStatusChanged(new NewCircuitState(State));
+            OnStatusChanged(new NewCircuitStatus(State));
         }
 
         public void HalfOpen()
         {
-            State = CircuitState.HalfOpen;
+            State = CircuitStatus.HalfOpen;
             Success = 0;
 
-            OnStatusChanged(new NewCircuitState(State));
+            OnStatusChanged(new NewCircuitStatus(State));
         }
 
         public void Close()
         {
             Errors = 0;
-            State = CircuitState.Closed;
+            State = CircuitStatus.Closed;
 
-            OnStatusChanged(new NewCircuitState(State));
+            OnStatusChanged(new NewCircuitStatus(State));
         }
 
-        public CircuitState GetState()
+        public CircuitStatus GetState()
         {
             return State;
         }
@@ -66,7 +66,7 @@ namespace CB.Core
                 Open();
         }
 
-        protected virtual void OnStatusChanged(NewCircuitState e)
+        protected virtual void OnStatusChanged(NewCircuitStatus e)
         {
             StatusChanged?.Invoke(e);
         }
@@ -75,13 +75,13 @@ namespace CB.Core
         {
             switch (State)
             {
-                case CircuitState.Closed:
+                case CircuitStatus.Closed:
                     ExecuteClosedCircuitAction(action);
                     break;
-                case CircuitState.HalfOpen:
+                case CircuitStatus.HalfOpen:
                     ExecuteHalfOpenCircuitAction(action);
                     break;
-                case CircuitState.Open:
+                case CircuitStatus.Open:
                     ExecuteOpenCircuitAction();
                     break;
                 default:
@@ -109,7 +109,7 @@ namespace CB.Core
         {
             TryHalfOpenCircuit();
 
-            if (State == CircuitState.Open)
+            if (State == CircuitStatus.Open)
                 throw new OpenCircuitException("Circuit is open");
         }
 

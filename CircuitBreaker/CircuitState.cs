@@ -1,7 +1,7 @@
 ﻿
 namespace CB.CircuitStates
 {
-    public enum CircuitState
+    public enum CircuitStatus
     {
         Closed,
         HalfOpen,

@@ -3,14 +3,14 @@ using System;
 
 namespace CB.Events
 {
-    public class NewCircuitState : EventArgs
+    public class NewCircuitStatus : EventArgs
     {
-        public CircuitState State { get; set; }
+        public CircuitStatus Status { get; set; }
         public object Date { get; private set; }
 
-        public NewCircuitState(CircuitState newState)
+        public NewCircuitStatus(CircuitStatus newStatus)
         {
-            State = newState;
+            Status = newStatus;
             Date = DateTime.UtcNow;
         }
     }

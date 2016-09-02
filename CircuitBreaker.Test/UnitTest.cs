@@ -22,7 +22,7 @@ namespace CB.Test
             ExecuteSucessAction(cb);
             ExecuteSucessAction(cb);
 
-            Assert.AreEqual(CircuitState.Closed, cb.GetState());
+            Assert.AreEqual(CircuitStatus.Closed, cb.GetState());
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace CB.Test
             ExecuteErrorAction(cb);
             ExecuteErrorAction(cb);
 
-            Assert.AreEqual(CircuitState.Closed, cb.GetState());
+            Assert.AreEqual(CircuitStatus.Closed, cb.GetState());
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace CB.Test
             ExecuteErrorAction(cb);
             ExecuteErrorAction(cb);
 
-            Assert.AreEqual(CircuitState.Open, cb.GetState());
+            Assert.AreEqual(CircuitStatus.Open, cb.GetState());
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace CB.Test
 
             ExecuteSucessAction(cb);
 
-            Assert.AreEqual(CircuitState.HalfOpen, cb.GetState());
+            Assert.AreEqual(CircuitStatus.HalfOpen, cb.GetState());
         }
 
         [TestMethod]
@@ -97,7 +97,7 @@ namespace CB.Test
             ExecuteSucessAction(cb);
             ExecuteSucessAction(cb);
 
-            Assert.AreEqual(CircuitState.HalfOpen, cb.GetState());
+            Assert.AreEqual(CircuitStatus.HalfOpen, cb.GetState());
         }
 
         [TestMethod]
@@ -111,7 +111,7 @@ namespace CB.Test
             ExecuteSucessAction(cb);
             ExecuteSucessAction(cb);
 
-            Assert.AreEqual(CircuitState.Closed, cb.GetState());
+            Assert.AreEqual(CircuitStatus.Closed, cb.GetState());
         }
 
         #region aux
