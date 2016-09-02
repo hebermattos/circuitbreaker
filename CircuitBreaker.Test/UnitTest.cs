@@ -11,7 +11,7 @@ namespace CB.Test
     public class UnitTest
     {
         [TestMethod]
-        public void should_keep_circuit_closed()
+        public void should_keep_circuit_closed_because_no_error_happened()
         {
             var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));
 
@@ -26,7 +26,7 @@ namespace CB.Test
         }
 
         [TestMethod]
-        public void should_keep_circuit_closed_v2()
+        public void should_keep_circuit_closed_beucase_not_reach_max_errors()
         {
             var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));
 
@@ -39,7 +39,7 @@ namespace CB.Test
         }
 
         [TestMethod]
-        public void should_open_circuit()
+        public void should_open_circuit_because_reach_max_errors()
         {
             var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));
 
@@ -54,7 +54,7 @@ namespace CB.Test
 
         [TestMethod]
         [ExpectedException(typeof(OpenCircuitException))]
-        public void circuit_keep_circuit_open()
+        public void keep_circuit_open_because_not_reach_the_timeout()
         {
             var cb = new CircuitBreaker(
                 maxErrors: 5, 
@@ -74,7 +74,7 @@ namespace CB.Test
         }
 
         [TestMethod]
-        public void should_half_open_circuit()
+        public void should_half_open_circuit_because_reach_the_timeout()
         {
             var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(2));
 
@@ -89,7 +89,7 @@ namespace CB.Test
 
 
         [TestMethod]
-        public void should_kepp_circuit_half_open()
+        public void should_kepp_circuit_half_open_because_not_reach_max_success()
         {
             var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));
 
@@ -102,7 +102,7 @@ namespace CB.Test
         }
 
         [TestMethod]
-        public void should_close_circuit()
+        public void should_close_circuit_because_reach_max_success()
         {
             var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));
 
