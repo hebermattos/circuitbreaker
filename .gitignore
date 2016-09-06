@@ -1,3 +1,5 @@
+*.sln.docstates
+nugetpub.bat
 
 # Created by https://www.gitignore.io/api/visualstudio
 
