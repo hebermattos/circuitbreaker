@@ -101,6 +101,18 @@ namespace cb.Test
         }
 
         [TestMethod]
+        public void should_open_again_because_error_on_half_open()
+        {
+            var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));
+
+            cb.HalfOpen();
+
+            ExecuteErrorAction(cb);
+
+            Assert.AreEqual(CircuitStatus.Open, cb.GetState());
+        }
+
+        [TestMethod]
         public void should_close_circuit_because_reach_max_success()
         {
             var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));
