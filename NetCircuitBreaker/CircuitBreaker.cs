@@ -63,8 +63,6 @@ namespace NetCircuitBreaker.Core
         {
             TryHalfOpenCircuit();
 
-
-
             ExecuteHalfOpenCircuitAction(action);
         }
 
