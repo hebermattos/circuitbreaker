@@ -20,8 +20,8 @@ try
 }
 catch (OpenCircuitException)
 {
-    //the circuit is open. after 15 seconds the circuit half open, and after three consecutive success, the circuit close
-	//error while half open the circuit open again
+    //the circuit is open. after 15 seconds half open the circuit, and after three consecutive success, close the circuit 
+	//error while 'half open' open the circuit again
 }
 catch (Exception)
 {
