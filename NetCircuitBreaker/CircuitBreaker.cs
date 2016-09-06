@@ -38,7 +38,7 @@ namespace NetCircuitBreaker.Core
                     ExecuteHalfOpenCircuitAction(action);
                     break;
                 case CircuitStatus.Open:
-                    ExecuteOpenCircuitAction();
+                    ExecuteOpenCircuitAction(action);
                     break;
                 default:
                     break;
@@ -59,12 +59,13 @@ namespace NetCircuitBreaker.Core
             }
         }
 
-        private void ExecuteOpenCircuitAction()
+        private void ExecuteOpenCircuitAction(Action action)
         {
             TryHalfOpenCircuit();
 
-            if (State == CircuitStatus.Open)
-                throw new OpenCircuitException("Circuit is open");
+
+
+            ExecuteHalfOpenCircuitAction(action);
         }
 
         private void ExecuteHalfOpenCircuitAction(Action action)
@@ -129,6 +130,9 @@ namespace NetCircuitBreaker.Core
         {
             if (DateTime.UtcNow.Subtract(OpenedAt) >= CircuitReset)
                 HalfOpen();
+
+            if (State == CircuitStatus.Open)
+                throw new OpenCircuitException("Circuit is open");
         }
 
         private void TryCloseCircuit()
