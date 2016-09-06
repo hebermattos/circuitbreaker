@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CB.Core;
-using CB.CircuitStates;
+using NetCircuitBreaker.Core;
+using NetCircuitBreaker.CircuitStates;
 using System.Threading;
-using CB.Exceptions;
+using NetCircuitBreaker.Exceptions;
 
-namespace CB.Test
+namespace cb.Test
 {
     [TestClass]
     public class UnitTest

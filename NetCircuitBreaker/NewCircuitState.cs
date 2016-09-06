@@ -1,7 +1,7 @@
-﻿using CB.CircuitStates;
+﻿using NetCircuitBreaker.CircuitStates;
 using System;
 
-namespace CB.Events
+namespace NetCircuitBreaker.Events
 {
     public class NewCircuitStatus : EventArgs
     {

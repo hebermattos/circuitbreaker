@@ -54,9 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NetCircuitBreaker\CircuitBreaker.csproj">
+    <ProjectReference Include="..\NetCircuitBreaker\NetCircuitBreaker.csproj">
       <Project>{a17f9443-7544-483f-b5c2-f72ff32631f1}</Project>
-      <Name>CircuitBreaker</Name>
+      <Name>NetCircuitBreaker</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

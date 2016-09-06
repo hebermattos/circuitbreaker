@@ -1,5 +1,5 @@
 ﻿
-namespace CB.CircuitStates
+namespace NetCircuitBreaker.CircuitStates
 {
     public enum CircuitStatus
     {

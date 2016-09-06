@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CB.Exceptions
+namespace NetCircuitBreaker.Exceptions
 {
     public class OpenCircuitException : Exception
     {

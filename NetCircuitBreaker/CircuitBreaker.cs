@@ -1,9 +1,9 @@
-﻿using CB.CircuitStates;
-using CB.Events;
-using CB.Exceptions;
+﻿using NetCircuitBreaker.CircuitStates;
+using NetCircuitBreaker.Events;
+using NetCircuitBreaker.Exceptions;
 using System;
 
-namespace CB.Core
+namespace NetCircuitBreaker.Core
 {
     public delegate void ChangedStatusHandler(NewCircuitStatus e);
 
