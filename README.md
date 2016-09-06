@@ -1,7 +1,11 @@
 # circuit breaker pattern
 http://martinfowler.com/bliki/CircuitBreaker.html
 
+
 # how to
+
+Install-Package NetCircuitBreaker
+
 ``` c#
 var cb = new CircuitBreaker(
                 maxErrors: 5, 
