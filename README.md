@@ -21,7 +21,7 @@ try
 catch (OpenCircuitException)
 {
     //the circuit is open. after 15 seconds the circuit half open, and after three consecutive success, the circuit close
-	//on error while half open the circuit open again
+	//error while half open the circuit open again
 }
 catch (Exception)
 {
