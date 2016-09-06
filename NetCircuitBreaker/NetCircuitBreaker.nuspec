@@ -6,6 +6,7 @@
     <title>NetCircuitBreaker</title>
     <authors>Heber Mattos</authors>
     <owners>Heber Mattos</owners>
+	<projectUrl>https://github.com/hebermattos/circuitbreaker</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>circuit breaker pattern</description>
     <releaseNotes></releaseNotes>
