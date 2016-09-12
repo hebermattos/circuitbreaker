@@ -39,6 +39,22 @@ namespace cb.Test
         }
 
         [TestMethod]
+        public void should_keep_circuit_closed_beucase_not_reach_max_errors_consecutive()
+        {
+            var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));
+
+            ExecuteErrorAction(cb);
+            ExecuteErrorAction(cb);
+            ExecuteErrorAction(cb);
+            ExecuteErrorAction(cb);
+            ExecuteSucessAction(cb);
+            ExecuteErrorAction(cb);
+            ExecuteErrorAction(cb);
+
+            Assert.AreEqual(CircuitStatus.Closed, cb.GetState());
+        }
+
+        [TestMethod]
         public void should_open_circuit_because_reach_max_errors()
         {
             var cb = new CircuitBreaker(5, 3, TimeSpan.FromSeconds(15));

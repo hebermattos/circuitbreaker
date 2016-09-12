@@ -25,6 +25,6 @@ catch (OpenCircuitException)
 }
 catch (Exception)
 {
-    //something went wrong. after five errors the circuit is open
+    //something went wrong. after five consecutive errors the circuit is open
 }
 ```

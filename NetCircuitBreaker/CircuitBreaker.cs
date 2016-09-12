@@ -50,6 +50,8 @@ namespace NetCircuitBreaker.Core
             try
             {
                 action.Invoke();
+
+                Errors = 0;
             }
             catch (Exception ex)
             {
