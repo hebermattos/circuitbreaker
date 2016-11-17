@@ -1,7 +1,10 @@
 # circuit breaker pattern
 http://martinfowler.com/bliki/CircuitBreaker.html
 
-#nuget
+# requirements
+Framework 4.6
+
+# nuget
 Install-Package NetCircuitBreaker
 
 # how to
